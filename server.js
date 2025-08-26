@@ -2,21 +2,21 @@ const express = require("express")
 const { errorHandler } = require("./middleware/errorMiddleware")
 const connectDB = require("./connect/database")
 const cors = require("cors")
-const dotenv = require("dotenv").config()
+require("dotenv").config()
 
 const port = process.env.PORT || 5000
 const app = express()
 // CORS for Netlify frontend
 app.use(
   cors({
-    origin: "taupe-cascaron-f1afa3.netlify.app", // Replace with your Netlify URL
-  })
+    origin: "https://taupe-cascaron-f1afa3.netlify.app", // Replace with your Netlify URL
+    credentials: true
+})
 )
 app.use(express.json())
 connectDB()
 
 // using JSON(middleware) NOTE: middleware always comes befor routes
-app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
 // connecting to the routes
